@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>资料整理笔记 · 九游娱乐索引</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #f7fafc;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.7;
+            color: #1a2a3a;
+            padding: 2rem 1.2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .page {
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+            flex: 1;
+        }
+
+        /* 网格卡片背景 —— 细密网格，呼应“索引” */
+        .card-grid {
+            background: #ffffff;
+            border-radius: 28px;
+            box-shadow: 0 8px 24px rgba(0, 40, 50, 0.06);
+            padding: 2rem 1.8rem;
+            margin-bottom: 2.2rem;
+            position: relative;
+            background-image: 
+                linear-gradient(rgba(60, 160, 150, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(60, 160, 150, 0.04) 1px, transparent 1px);
+            background-size: 24px 24px;
+            backdrop-filter: blur(1px);
+            transition: box-shadow 0.2s ease;
+        }
+        .card-grid:hover {
+            box-shadow: 0 12px 32px rgba(0, 70, 70, 0.08);
+        }
+
+        /* 蓝绿色点缀 */
+        .accent {
+            color: #1f7a73;
+            font-weight: 500;
+        }
+        .accent-bg {
+            background: #dff3f0;
+            border-left: 4px solid #2e9c8a;
+            padding: 1.2rem 1.5rem;
+            border-radius: 0 16px 16px 0;
+            margin: 1.8rem 0;
+        }
+        .badge {
+            display: inline-block;
+            background: #e2f0ee;
+            color: #1a635b;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            padding: 0.2rem 0.9rem;
+            border-radius: 40px;
+            margin-right: 0.3rem;
+            margin-bottom: 0.3rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+            color: #0a2e2b;
+        }
+        .subhead {
+            font-size: 1rem;
+            color: #4a6a6a;
+            border-bottom: 2px solid #cfe5e1;
+            padding-bottom: 1.2rem;
+            margin-bottom: 1.6rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+        .subhead span {
+            background: #ecf6f4;
+            padding: 0 0.6rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: #1b6b62;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin: 2rem 0 0.8rem 0;
+            color: #1a4f48;
+            border-left: 6px solid #2e9c8a;
+            padding-left: 0.9rem;
+        }
+        .intro-text {
+            font-size: 1.05rem;
+            margin: 1rem 0 1.4rem 0;
+            color: #2d3f3f;
+        }
+        p {
+            margin-bottom: 1.1rem;
+        }
+
+        /* 引用提示块 */
+        .quote-tip {
+            background: #ebf8f5;
+            border-radius: 20px;
+            padding: 1.2rem 1.6rem;
+            font-style: normal;
+            color: #104d47;
+            margin: 1.6rem 0;
+            border: 1px solid #b8dbd4;
+            box-shadow: 0 2px 6px rgba(30, 120, 110, 0.04);
+        }
+        .quote-tip::before {
+            content: "📎 整理提示 ";
+            font-weight: 600;
+            color: #1c7e72;
+            display: block;
+            margin-bottom: 0.25rem;
+            font-size: 0.9rem;
+            letter-spacing: 0.3px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin: 1.5rem 0 0.5rem 0;
+        }
+        .feature-item {
+            background: #f5fbfa;
+            padding: 1.2rem 1rem;
+            border-radius: 20px;
+            border: 1px solid #d6ece6;
+        }
+        .feature-item h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #13534a;
+            margin-bottom: 0.3rem;
+        }
+        .feature-item p {
+            font-size: 0.92rem;
+            margin-bottom: 0;
+            color: #325a54;
+        }
+
+        /* FAQ 摘要 —— 紧凑卡片 */
+        .faq-mini {
+            margin: 1.8rem 0 0.8rem 0;
+        }
+        .faq-item {
+            border-bottom: 1px solid #daebe7;
+            padding: 0.9rem 0;
+        }
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        .faq-q {
+            font-weight: 600;
+            color: #114e46;
+            display: flex;
+            align-items: baseline;
+            gap: 0.4rem;
+        }
+        .faq-q::before {
+            content: "Q";
+            background: #2e9c8a;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            width: 1.2rem;
+            height: 1.2rem;
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .faq-a {
+            margin-top: 0.3rem;
+            padding-left: 1.8rem;
+            color: #3b5f59;
+            font-size: 0.95rem;
+        }
+
+        .visit-sentence {
+            margin: 2.4rem 0 1.2rem 0;
+            padding: 1.2rem 1.8rem;
+            background: white;
+            border: 1px solid #c6ddd6;
+            border-radius: 60px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 60, 50, 0.04);
+            font-size: 1.05rem;
+        }
+
+        a {
+            color: #1b7a6c;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.15s;
+        }
+        a:hover {
+            border-bottom-color: #1b7a6c;
+        }
+        .footer-note {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #758f8a;
+            border-top: 1px solid #d1e3de;
+            padding-top: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 580px) {
+            body {
+                padding: 1rem 0.8rem;
+            }
+            .card-grid {
+                padding: 1.4rem 1rem;
+                border-radius: 20px;
+            }
+            h1 {
+                font-size: 1.7rem;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 0.9rem;
+            }
+            .subhead {
+                flex-direction: column;
+                gap: 0.2rem;
+            }
+            .visit-sentence {
+                border-radius: 40px;
+                padding: 1rem 1.2rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- 卡片网格背景区域 -->
+        <div class="card-grid">
+
+            <h1>从资料到索引 · 九游娱乐</h1>
+            <div class="subhead">
+                <span>整理 · 归档 · 日常化</span>
+                <span>#信息切片 #2025</span>
+            </div>
+
+            <p class="intro-text">
+                平时浏览、收集、对比，慢慢攒下不少围绕「九游娱乐」的片段。这篇笔记不是广告，更像一份个人向的档案卡片——把零散的信息点串起来，方便自己回看，也分享给同样在整理资料的朋友。
+            </p>
+
+            <!-- 正文段落一 -->
+            <h2>碎片归档 · 从哪开始</h2>
+            <p>
+                最早注意到 <a href="https://main--jiuyou.com">九游娱乐</a> 是因为一份行业简报里的产品矩阵图。后来陆续补了一些界面录屏、更新日志和用户讨论，发现它的内容覆盖面比想象中宽：既有轻度休闲的部分，也有偏策略向的模块。对于做竞品资料整理的人来说，这种混合生态反而是很好的观察样本。
+            </p>
+            <p>
+                我习惯把收集到的素材按“品类-交互-运营活动”打标签，再用表格和截图归档。过程中发现官方页面本身就像一个索引节点——入口统一，分支清晰。如果你也在整理类似品类的信息，不妨把它的站点当作一个参照锚点。
+            </p>
+
+            <!-- 引用提示 -->
+            <div class="quote-tip">
+                引用的数据尽量标注来源时间，尤其是活动规则和版本号。网络信息更新快，归档时留个日期戳，后面回溯能省很多力气。
+            </div>
+
+            <!-- 特征小卡片（网格） -->
+            <h2>信息索引的几个侧面</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h3>内容分类</h3>
+                    <p>按题材、玩法、模式划出主目录，找具体条目时不用层层翻页，适合横向对比。</p>
+                </div>
+                <div class="feature-item">
+                    <h3>更新节奏</h3>
+                    <p>活动与版本更迭有一定周期性，留意公告区的表述，能提前预判素材收集窗口。</p>
+                </div>
+                <div class="feature-item">
+                    <h3>交互逻辑</h3>
+                    <p>从列表到详情页的跳转比较直接，没有冗余弹层，截流程图的成本较低。</p>
+                </div>
+                <div class="feature-item">
+                    <h3>社区反馈</h3>
+                    <p>评论区与论坛帖子里藏着不少真实使用场景，对整理用户画像有帮助。</p>
+                </div>
+            </div>
+
+            <!-- 正文段落二 -->
+            <h2>日常归档里的“可访问性”</h2>
+            <p>
+                做资料整理久了，慢慢意识到一个稳定的信息锚点有多重要。不用每次重新搜索，也不用担心入口变动——把 <a href="https://main--jiuyou.com">九游娱乐</a> 放在书签栏的“素材源”文件夹里，随用随取。最近一次整理时，还顺手把它的站点地图截了一张长图，作为目录结构的视觉备份。
+            </p>
+            <p>
+                当然，每个人的归档习惯不一样。有人喜欢用 Notion 做数据库，有人偏爱本地 markdown 加静态页面。但不管工具怎么换，核心都是把“可访问”这件事做好。这一点上，一个清晰、克制的官网本身就是最好的索引首页。
+            </p>
+
+            <!-- FAQ 摘要 (轻量) -->
+            <div class="faq-mini">
+                <div class="faq-item">
+                    <div class="faq-q">归档时需要注意什么？</div>
+                    <div class="faq-a">尽量保留截图日期和版本号，分类标签别太细，三到五级足够。定期清理过期素材。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">信息源只靠官网够吗？</div>
+                    <div class="faq-a">官网是基础盘，辅助看一些第三方数据报告和用户自发的测评，视角会更立体。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">移动端整理方便吗？</div>
+                    <div class="faq-a">现在多数站点适配都不错，手机浏览器配合云笔记就可以做轻量采集。推荐用 Web 剪藏工具。</div>
+                </div>
+            </div>
+
+            <!-- 访问句 (自然嵌入) -->
+            <div class="visit-sentence">
+                如果你也在做类似的信息沉淀，可以直接把 <a href="https://main--jiuyou.com">九游娱乐</a> 加入你的资料源清单。
+            </div>
+
+            <!-- 收尾段落 -->
+            <p style="margin-top: 1.6rem; font-size: 0.96rem; color: #42635d;">
+                这篇索引笔记会持续增补。下次更新准备加一栏“界面演变记录”，把不同时期的首页布局并列对比。资料整理本身就是一件慢慢来的事，保持开放，保持好奇。
+            </p>
+
+            <div class="footer-note">
+                <span class="badge">资料卡片 v1.0</span>
+                <span class="badge">归档周期 2025 · 春</span>
+                <br style="display: block; margin-top: 6px;">
+                <span style="opacity: 0.7;">以整理为线索，而非评价</span>
+            </div>
+        </div>
+        <!-- end card-grid -->
+    </div>
+</body>
+</html>
